@@ -1,0 +1,21 @@
+{
+  "name": "ce-reference-tool",
+  "version": "0.0.1",
+  "description": "Server for tool to reference CE regulations by profession and state",
+  "main": "index.js",
+  "author": "Kevin Smith",
+  "license": "MIT",
+  "scripts": {
+    "start": "node",
+    "server": "nodemon"
+  },
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^7.0.0",
+    "express": "^4.16.4",
+    "helmet": "^3.16.0"
+  },
+  "devDependencies": {
+    "nodemon": "^1.18.10"
+  }
+}
