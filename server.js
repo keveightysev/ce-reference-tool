@@ -3,6 +3,7 @@ const helmet = require('helmet');
 const cors = require('cors');
 
 const boards = require('./boards/route.js');
+const users = require('./users/route.js');
 
 const server = express();
 
@@ -11,6 +12,7 @@ server.use(express.json());
 server.use(cors());
 
 server.use('/api/boards', boards);
+server.use('/api/users', users);
 
 server.get('/', (req, res) => {
   res.send(`
