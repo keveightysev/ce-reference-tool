@@ -2,9 +2,10 @@ exports.up = function(knex) {
   return knex.schema
     .createTable('boards', table => {
       table.increments();
-      table.string('state', 2).notNullable();
+      table.string('country');
+      table.string('state', 2);
       table.string('profession').notNullable();
-      table.string('accepted_credits').notNullable();
+      table.string('accepted_credits');
       table.string('url');
       table.string('credits');
       table.string('hs_credits');
