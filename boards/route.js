@@ -2,6 +2,8 @@ const router = require('express').Router();
 
 const Boards = require('./model.js');
 
+const restricted = require('../auth/restricted.js');
+
 router.get('/', async (req, res) => {
   try {
     const boards = await Boards.all();
@@ -14,7 +16,7 @@ router.get('/', async (req, res) => {
   }
 });
 
-router.post('/new', async (req, res) => {
+router.post('/new', restricted, async (req, res) => {
   if (!req.body.state || !req.body.profession) {
     res
       .status(406)
