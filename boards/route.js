@@ -14,4 +14,20 @@ router.get('/', async (req, res) => {
   }
 });
 
+router.post('/new', async (req, res) => {
+  if (!req.body.state || !req.body.profession) {
+    res
+      .status(406)
+      .json({ message: 'Please make sure to include a state and profession' });
+    return;
+  }
+  try {
+    const newBoard = await Boards.add(req.body);
+    res.status(201).json(newBoard);
+  } catch (err) {
+    console.log(err);
+    res.status(500).json({ message: 'Server error adding new board' });
+  }
+});
+
 module.exports = router;

@@ -23,7 +23,7 @@ router.post('/register', async (req, res) => {
     let user = req.body;
     user.password = bcrypt.hashSync(user.password, 10);
     const newUser = await Users.add(user);
-    res.status(201).json(newUser[0]);
+    res.status(201).json(newUser);
   } catch (err) {
     console.log(err);
     res.status(500).json({ message: 'Server error creating new user' });
