@@ -21,6 +21,16 @@ const Selector = props => {
           </option>
           <option value='AL'>Alabama</option>
           <option value='AK'>Alaska</option>
+          <option value='AZ'>Arizona</option>
+          <option value='AR'>Arkansas</option>
+          <option value='CA'>California</option>
+          <option value='CO'>Colorado</option>
+          <option value='CT'>Connecticut</option>
+          <option value='DE'>Delaware</option>
+          <option value='FL'>Florida</option>
+          <option value='GA'>Georgia</option>
+          <option value='HI'>Hawaii</option>
+          <option value='ID'>Idaho</option>
         </select>
       </div>
       <div>
