@@ -1,6 +1,6 @@
 export const initialState = {
-  selectedState: '',
-  selectedProfession: '',
+  selectedState: 'AL',
+  selectedProfession: 'psychologist',
   boards: [],
   isLoading: false,
   isError: false,
@@ -14,6 +14,10 @@ export const reducer = (state = initialState, action) => {
       return { ...state, isLoading: false, boards: action.payload };
     case 'GET_FAILURE':
       return { ...state, isLoading: false, isError: true };
+    case 'CHANGE_STATE':
+      return { ...state, selectedState: action.payload };
+    case 'CHANGE_PROFESSION':
+      return { ...state, selectedProfession: action.payload };
     default:
       return state;
   }

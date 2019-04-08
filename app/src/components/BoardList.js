@@ -2,21 +2,22 @@ import React, { useContext } from 'react';
 
 import { AppContext } from '../Context';
 
+import Board from './Board';
+
 const BoardList = props => {
   const { state } = useContext(AppContext);
-  const boards = state.boards;
+  const { boards, selectedState, selectedProfession } = state;
   return (
     <div>
-      <h2>Board List</h2>
-      {boards.map(board => {
-        return (
-          <div key={board.id}>
-            <h3>
-              {board.state} {board.profession}
-            </h3>
-          </div>
-        );
-      })}
+      {boards
+        .filter(
+          board =>
+            board.state === selectedState &&
+            board.profession === selectedProfession.toLowerCase(),
+        )
+        .map(board => (
+          <Board key={board.id} board={board} />
+        ))}
     </div>
   );
 };
