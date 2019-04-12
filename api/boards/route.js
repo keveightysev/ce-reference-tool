@@ -32,4 +32,19 @@ router.post('/new', restricted, async (req, res) => {
   }
 });
 
+router.put('/update/:id', restricted, async (req, res) => {
+  try {
+    const board = await Boards.update(req.params.id, req.body);
+    if (board) {
+      console.log(board);
+      res.status(200).json(board);
+    } else {
+      res.status(404).json({ message: 'Board not found' });
+    }
+  } catch (err) {
+    console.log(err);
+    res.status(500).json({ message: 'Server error updating the board' });
+  }
+});
+
 module.exports = router;

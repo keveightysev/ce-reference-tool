@@ -15,4 +15,13 @@ const findBoardById = id => {
     .first();
 };
 
-module.exports = { all, add, findBoardById };
+const update = async (id, board) => {
+  await db('boards')
+    .where({ id })
+    .update(board);
+  return db('boards')
+    .where({ id })
+    .first();
+};
+
+module.exports = { all, add, findBoardById, update };

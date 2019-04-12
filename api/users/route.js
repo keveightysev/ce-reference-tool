@@ -48,7 +48,7 @@ router.post('/login', async (req, res) => {
   }
 });
 
-router.put('/update', restricted, byRole('admin'), async (req, res) => {
+router.put('/update', restricted, checkRole('admin'), async (req, res) => {
   try {
     const userInfo = await Users.findBy({ username: req.body.username });
     const user = await Users.update(userInfo.id, req.body);
