@@ -31,7 +31,7 @@ const Login = props => {
         'https://shrouded-dusk-14111.herokuapp.com/api/users/login',
         creds,
       );
-      dispatch({ type: 'LOGIN_SUCCESS' });
+      dispatch({ type: 'LOGIN_SUCCESS', payload: res.data.role });
       localStorage.setItem('token', res.data.token);
       setCreds(credentials);
       props.history.push('/admin');

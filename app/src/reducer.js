@@ -2,6 +2,7 @@ export const initialState = {
   selectedState: '',
   selectedProfession: '',
   boards: [],
+  role: '',
   isLoading: false,
   isError: false,
   isLoggingIn: false,
@@ -23,7 +24,7 @@ export const reducer = (state = initialState, action) => {
     case 'LOGIN_START':
       return { ...state, isLoggingIn: true };
     case 'LOGIN_SUCCESS':
-      return { ...state, isLoggingIn: false };
+      return { ...state, isLoggingIn: false, role: action.payload };
     case 'LOGIN_FAILURE':
       return { ...state, isLoggingIn: false, isError: true };
     case 'INVALID_CREDENTIALS':

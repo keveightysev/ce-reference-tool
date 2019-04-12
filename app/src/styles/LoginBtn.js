@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 
 export const LoginBtn = styled.button`
+  cursor: pointer;
   position: absolute;
   right: 20px;
   top: 20px;
