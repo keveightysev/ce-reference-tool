@@ -3,20 +3,22 @@ const bcrypt = require('bcryptjs');
 
 const Users = require('./model.js');
 
+const restricted = require('../auth/restricted.js');
+const checkRole = require('../auth/checkRole.js');
+
 const generateToken = require('../auth/generateToken.js');
 
-router.post('/register', async (req, res) => {
-  if (!req.body.first_name || !req.body.last_name) {
-    res.status(406).json({ message: 'Full name required' });
-    return;
-  } else if (!req.body.email) {
-    res.status(406).json({ message: 'Email required' });
-    return;
-  } else if (!req.body.username) {
-    res.status(406).json({ message: 'Username required' });
-    return;
-  } else if (!req.body.password) {
-    res.status(406).json({ message: 'Password required' });
+router.post('/adduser', restricted, checkRole('admin'), async (req, res) => {
+  if (
+    !req.body.first_name ||
+    !req.body.last_name ||
+    !req.body.email ||
+    !req.body.username ||
+    !req.body.password
+  ) {
+    res
+      .status(406)
+      .json({ message: 'Full name, email, username, and password required' });
     return;
   }
   try {
@@ -43,6 +45,17 @@ router.post('/login', async (req, res) => {
   } catch (err) {
     console.log(err);
     res.status(500).json({ message: 'Server error logging in' });
+  }
+});
+
+router.put('/update', restricted, byRole('admin'), async (req, res) => {
+  try {
+    const userInfo = await Users.findBy({ username: req.body.username });
+    const user = await Users.update(userInfo.id, req.body);
+    res.status(200).json(user);
+  } catch (err) {
+    console.log(err);
+    res.status(500).json({ message: 'Server error updating user' });
   }
 });
 
