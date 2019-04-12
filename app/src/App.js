@@ -1,13 +1,12 @@
 import React, { useEffect, useContext } from 'react';
 import axios from 'axios';
+import { Route } from 'react-router-dom';
 
 import { AppContext } from './Context';
 
 import Global from './styles/Global';
-import Header from './styles/Header';
-
-import Selector from './components/Selector';
-import BoardList from './components/BoardList';
+import Home from './components/Home';
+import Login from './components/Admin/Login';
 
 const App = props => {
   const { dispatch } = useContext(AppContext);
@@ -17,7 +16,9 @@ const App = props => {
     const getData = async () => {
       dispatch({ type: 'GET_START' });
       try {
-        const res = await axios.get('http://localhost:5000/api/boards');
+        const res = await axios.get(
+          'https://shrouded-dusk-14111.herokuapp.com/api/boards',
+        );
         if (!didCancel) {
           dispatch({ type: 'GET_SUCCESS', payload: res.data });
         }
@@ -36,11 +37,8 @@ const App = props => {
   return (
     <>
       <Global />
-      <Header>
-        <h1>CE Reference Tool</h1>
-      </Header>
-      <Selector />
-      <BoardList />
+      <Route path='/' exact component={Home} />
+      <Route path='/login' component={Login} />
     </>
   );
 };

@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 
-import { AppContext } from '../Context';
+import { AppContext } from '../../Context';
 
 import Board from './Board';
 

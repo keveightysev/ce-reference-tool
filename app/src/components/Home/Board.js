@@ -1,6 +1,6 @@
 import React from 'react';
 
-import BoardCard from '../styles/BoardCard';
+import BoardCard from '../../styles/BoardCard';
 
 const Board = ({ board }) => {
   const upperFirst = string => {

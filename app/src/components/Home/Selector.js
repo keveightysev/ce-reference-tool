@@ -1,8 +1,8 @@
 import React, { useContext } from 'react';
 
-import { AppContext } from '../Context';
+import { AppContext } from '../../Context';
 
-import Dropdowns from '../styles/Dropdowns';
+import Dropdowns from '../../styles/Dropdowns';
 
 const Selector = props => {
   const { dispatch } = useContext(AppContext);
