@@ -13,6 +13,13 @@ const Global = createGlobalStyle`
         color: #FFF;
         font-family: 'Roboto', sans-serif;
     }
+    .sr {
+        position: absolute;
+        left: -99999px;
+        height: 1px;
+        width: 1px;
+        overflow: hidden;
+      }
 `;
 
 export default Global;

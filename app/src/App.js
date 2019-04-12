@@ -41,7 +41,7 @@ const App = props => {
       <Global />
       <Route path='/' exact component={Home} />
       <Route path='/login' component={Login} />
-      <Verify path='/admin' exact component={Admin} />
+      <Verify path='/admin' component={Admin} />
     </>
   );
 };
