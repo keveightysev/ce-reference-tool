@@ -7,6 +7,8 @@ import { AppContext } from './Context';
 import Global from './styles/Global';
 import Home from './components/Home';
 import Login from './components/Admin/Login';
+import Verify from './components/Admin/Verify';
+import Admin from './components/Admin';
 
 const App = props => {
   const { dispatch } = useContext(AppContext);
@@ -39,6 +41,7 @@ const App = props => {
       <Global />
       <Route path='/' exact component={Home} />
       <Route path='/login' component={Login} />
+      <Verify path='/admin' exact component={Admin} />
     </>
   );
 };

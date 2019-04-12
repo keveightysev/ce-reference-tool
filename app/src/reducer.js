@@ -4,6 +4,8 @@ export const initialState = {
   boards: [],
   isLoading: false,
   isError: false,
+  isLoggingIn: false,
+  invalidCreds: false,
 };
 
 export const reducer = (state = initialState, action) => {
@@ -18,6 +20,14 @@ export const reducer = (state = initialState, action) => {
       return { ...state, selectedState: action.payload };
     case 'CHANGE_PROFESSION':
       return { ...state, selectedProfession: action.payload };
+    case 'LOGIN_START':
+      return { ...state, isLoggingIn: true };
+    case 'LOGIN_SUCCESS':
+      return { ...state, isLoggingIn: false };
+    case 'LOGIN_FAILURE':
+      return { ...state, isLoggingIn: false, isError: true };
+    case 'INVALID_CREDENTIALS':
+      return { ...state, isLoggingIn: false, invalidCreds: true };
     default:
       return state;
   }

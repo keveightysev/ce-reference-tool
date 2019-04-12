@@ -1,5 +1,10 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import axios from 'axios';
+import { withRouter } from 'react-router-dom';
+
+import { AppContext } from '../../Context';
+
+import { LoginPage } from '../../styles/LoginPage';
 
 const Login = props => {
   const credentials = {
@@ -8,6 +13,8 @@ const Login = props => {
   };
 
   const [creds, setCreds] = useState(credentials);
+
+  const { state, dispatch } = useContext(AppContext);
 
   const handleChange = e => {
     setCreds({
@@ -18,45 +25,68 @@ const Login = props => {
 
   const handleLogin = async e => {
     e.preventDefault();
+    dispatch({ type: 'LOGIN_START' });
     try {
       const res = await axios.post(
         'https://shrouded-dusk-14111.herokuapp.com/api/users/login',
         creds,
       );
+      dispatch({ type: 'LOGIN_SUCCESS' });
       localStorage.setItem('token', res.data.token);
       setCreds(credentials);
       props.history.push('/admin');
     } catch (err) {
-      console.log(err.message);
+      if (err.response.status === 401) {
+        dispatch({ type: 'INVALID_CREDENTIALS' });
+      } else {
+        console.log(err.response);
+        dispatch({ type: 'LOGIN_FAILURE' });
+      }
+      setCreds(credentials);
     }
   };
 
   return (
-    <>
-      <h2>login page</h2>
+    <LoginPage>
+      <h2>Admin Login</h2>
+      <p
+        style={
+          state.invalidCreds
+            ? { visibility: 'visible' }
+            : { visibility: 'hidden' }
+        }
+      >
+        Invalid Credentials
+      </p>
       <form onSubmit={handleLogin}>
         <div>
-          <label htmlFor='username'>Username</label>
+          <label htmlFor='username' className='sr'>
+            Username
+          </label>
           <input
             type='text'
             id='username'
             value={creds.username}
             onChange={handleChange}
+            placeholder='Username'
           />
         </div>
         <div>
-          <label htmlFor='password'>Password</label>
+          <label htmlFor='password' className='sr'>
+            Password
+          </label>
           <input
             type='password'
             id='password'
             value={creds.password}
             onChange={handleChange}
+            placeholder='Password'
           />
         </div>
         <button>Login</button>
       </form>
-    </>
+    </LoginPage>
   );
 };
 
-export default Login;
+export default withRouter(Login);
