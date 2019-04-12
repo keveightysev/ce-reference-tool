@@ -9,7 +9,7 @@ import { LoginBtn } from '../../styles/LoginBtn';
 const Home = props => {
   const handleLogin = e => {
     e.preventDefault();
-    props.history.push('/login');
+    props.history.push('/admin');
   };
   return (
     <>

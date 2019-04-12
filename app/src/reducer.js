@@ -1,6 +1,6 @@
 export const initialState = {
-  selectedState: 'AL',
-  selectedProfession: 'psychologist',
+  selectedState: '',
+  selectedProfession: '',
   boards: [],
   isLoading: false,
   isError: false,
